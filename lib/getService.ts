@@ -1,5 +1,3 @@
-
-
 import  {GrpcObject, loadPackageDefinition} from "npm:@grpc/grpc-js";
 import {loadSync} from "npm:@grpc/proto-loader";
 import { ServiceClientConstructor, ServiceDefinition } from 'npm:@grpc/grpc-js/build/src/make-client';

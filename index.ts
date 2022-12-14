@@ -1,1 +1,8 @@
-import fastify from 'npm:fastify@^4.10.2'
+import getService from "./lib/getService.ts";
+
+const greeterService = getService({
+  package: 'helloworld',
+  service: 'Greeter',
+  path: './protos/helloworld.proto',
+});
+console.log(greeterService);

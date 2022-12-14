@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  db: 
+    image: bitnami/mongodb:5.0.14
+    environment:
+      - MONGODB_ROOT_PASSWORD=secret
+      - MONGODB_USERNAME=app
+      - MONGODB_PASSWORD=secret
+      - MONGODB_DATABASE=app
+    ports:
+      - 27017:27017

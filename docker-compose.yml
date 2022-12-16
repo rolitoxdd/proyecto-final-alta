@@ -10,3 +10,8 @@ services:
       - MONGODB_DATABASE=app
     ports:
       - 27017:27017
+  cron:
+    build: ./services/cron
+    depends_on:
+      - db
+    env_file: .env

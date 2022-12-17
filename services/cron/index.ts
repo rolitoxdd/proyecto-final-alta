@@ -1,17 +1,19 @@
-// import {cron, daily, monthly, weekly, start} from 'https://deno.land/x/deno_cron/cron.ts';
-import { config } from "https://deno.land/x/dotenv@v3.2.0/mod.ts";
 import getClient from "./lib/mongo.ts";
 
-const client = getClient();
-const env = config();
+
+
+const uri = Deno.env.get("MONGO_URI") as string;
+
+console.log(uri);
+
+const client = getClient(uri);
 
 // sleep 30 seconds
-await new Promise(resolve => setTimeout(resolve, 20000));
 
 
 const apiUrl = "https://mindicador.cl/api/uf";
 const apiUrl2 = "https://mindicador.cl/api/dolar";
-const apiUrl3 = env.WEATHER_URI
+const apiUrl3 = Deno.env.get('WEATHER_URI') as string;
 
 async function getUf() {
   const response = await fetch(apiUrl);

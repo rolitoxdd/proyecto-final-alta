@@ -13,6 +13,6 @@ services:
   cron:
     build: ./services/cron
     env_file:
-      - services/cron/.env
+      - ./services/cron/.env
     depends_on:
       - db

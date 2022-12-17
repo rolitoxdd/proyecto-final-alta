@@ -48,7 +48,8 @@ async function insertInfo() {
     uf: uf.serie[0].valor,
     dolar: dolar.serie[0].valor,
     weather: weather.main.temp,
-    date: new Date()
+    date: new Date(),
+    crossword: 'https://isbooth.com/crucigramas'
   });
   client.close();
   console.log(result);

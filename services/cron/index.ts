@@ -1,18 +1,17 @@
-import * as dotenv from "https://deno.land/x/dotenv@v3.2.0/mod.ts";
-
-Deno.env.set("MONGO_USER",dotenv.config().MONGO_USER);
-Deno.env.set("MONGO_PASS",dotenv.config().MONGO_PASS);
-Deno.env.set("WEATHER_KEY",dotenv.config().WEATHER_KEY);
-
+// import {cron, daily, monthly, weekly, start} from 'https://deno.land/x/deno_cron/cron.ts';
+import { config } from "https://deno.land/x/dotenv@v3.2.0/mod.ts";
 import getClient from "./lib/mongo.ts";
-const client = getClient(Deno.env.get("MONGO_USER") as string, Deno.env.get("MONGO_PASS") as string);
 
-// URL de la API a la que se quiere acceder
+const client = getClient();
+const env = config();
+
+// sleep 30 seconds
+await new Promise(resolve => setTimeout(resolve, 20000));
+
+
 const apiUrl = "https://mindicador.cl/api/uf";
 const apiUrl2 = "https://mindicador.cl/api/dolar";
-
-// URL de la API que obtiene la temperatura de la ciudad de Santiago de Chile
-const apiUrl3 = `https://api.openweathermap.org/data/2.5/weather?lat=70&lon=33&appid=${Deno.env.get('WEATHER_KEY')}`;
+const apiUrl3 = env.WEATHER_URI
 
 async function getUf() {
   const response = await fetch(apiUrl);
@@ -34,7 +33,7 @@ async function getWeather() {
 const uf = await getUf();
 const dolar = await getDolar();
 const weather = await getWeather();
-console.log(uf, dolar, weather);
+console.log(uf.serie[0].valor, dolar.serie[0].valor, weather.main.temp);
 
 // meter uf, dolar y weather en mongo
 await client.connect();

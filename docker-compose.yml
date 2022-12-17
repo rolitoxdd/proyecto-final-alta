@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   db: 
-    image: bitnami/mongodb:5.0.14
+    image: bitnami/mongodb:6.0
     environment:
       - MONGODB_ROOT_PASSWORD=secret
       - MONGODB_USERNAME=app
@@ -12,6 +12,7 @@ services:
       - 27017:27017
   cron:
     build: ./services/cron
+    env_file:
+      - services/cron/.env
     depends_on:
       - db
-    env_file: .env

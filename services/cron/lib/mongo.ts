@@ -1,8 +1,11 @@
 import { MongoClient } from 'npm:mongodb';
+import { config } from "https://deno.land/x/dotenv@v3.2.0/mod.ts";
 
+const env = config();
+const uri = Deno.env.get("MONGO_URI") as string;
 
-export default function(user: string, pass: string) {
-    const uri = `mongodb://${user}:${pass}@localhost:27017/app`
+console.log(uri);
+export default function() {
     console.log(uri);
     const client = new MongoClient(uri);
     return client;

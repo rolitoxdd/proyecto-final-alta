@@ -1,0 +1,23 @@
+name: 'cd alta'
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: 'development cd deploy'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'EC2 deploy'
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_KEY_GCLOUD }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key eduardo_galvez@34.27.135.113 '
+            cd ~/proyecto-final-alta &&
+            git checkout . &&
+            git fetch &&
+            git checkout ${{ github.sha }} &&
+            docker-compose up -d --build
+          '

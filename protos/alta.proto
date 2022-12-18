@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+message Empty{}
+
+message GetTemperatureRequest {
+  string city = 1;
+}
+
+message GetTemperatureResponse {
+  float temperature = 1;
+}
+
+message GetUFRequest {
+  string date = 1;
+}
+
+message GetUFResponse {
+  float uf = 1;
+}
+
+message GetDolarRequest {
+  string date = 1;
+}
+
+message GetDolarResponse {
+  float dolar = 1;
+}
+
+service Alta {
+  rpc GetTemperature (Empty) returns (GetTemperatureResponse) {}
+  rpc GetUF (Empty) returns (GetUFResponse) {}
+  rpc GetDolar (Empty) returns (GetDolarResponse) {}
+}

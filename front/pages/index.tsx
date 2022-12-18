@@ -26,15 +26,15 @@ export default function Home({
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Acá va:
+            Dolar:
             <code className={styles.code}> {dolar}</code>
           </p>
           <p>
-            También va:
+            UF:
             <code className={styles.code}> {uf}</code>
           </p>
           <p>
-            Y también:
+            Temperatura:
             <code className={styles.code}> {temperature}</code>
           </p>
         </div>
